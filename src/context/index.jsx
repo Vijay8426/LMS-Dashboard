@@ -31,14 +31,22 @@ export function reducer(state, action) {
 }
 
 export function MaterialTailwindControllerProvider({ children }) {
-  const initialState = {
-    openSidenav: false,
-    sidenavColor: "dark",
-    sidenavType: "white",
-    transparentNavbar: true,
-    fixedNavbar: false,
-    openConfigurator: false,
-  };
+  const role = localStorage.getItem("role") || "admin";
+  const initialState = role=== "admin" ? { 
+openSidenav: true,
+sidenavColor: "white",
+sidenavType: "dark",
+transparentNavbar: false,
+fixedNavbar: true,
+openConfigurator: false,
+} : {
+openSidenav: false,
+sidenavColor: "cyan",
+sidenavType: "white",
+transparentNavbar: true,
+fixedNavbar: false,
+openConfigurator: false,
+};  
 
   const [controller, dispatch] = React.useReducer(reducer, initialState);
   const value = React.useMemo(

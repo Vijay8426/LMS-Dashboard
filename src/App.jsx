@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AdminDashboard, Auth } from "@/layouts";
 
+
 function App() {
   return (
     <Routes>

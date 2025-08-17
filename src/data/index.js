@@ -1,4 +1,7 @@
 export * from "@/data/statistics-cards-data";
+export * from "@/data/courses-deadline";
+export * from "@/data/students-charts";
+export * from "@/data/student_statistics";
 export * from "@/data/statistics-charts-data";
 export * from "@/data/projects-table-data";
 export * from "@/data/orders-overview-data";

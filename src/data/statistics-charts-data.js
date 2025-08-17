@@ -15,31 +15,38 @@ const courseCompletionChart = {
   },
 };
 
-const dailyActiveUsersChart = {
-  type: "line",
-  height: 220,
+
+const weeklyStudyHoursChart = {
+  type: "area",
+  height: 250,
   series: [
     {
-      name: "Active Users",
-      data: [120, 150, 180, 200, 170, 190, 210], // Mock data for Mon-Sun
+      name: "Study Hours",
+      data: [12, 15, 18, 14, 20, 16, 19], // Example weekly hours
     },
   ],
   options: {
     ...chartsConfig,
-    colors: ["#0288d1"],
-    stroke: {
-      curve: "smooth",
-      width: 3,
-    },
-    markers: {
-      size: 5,
+    colors: ["#0288d1"], // cyan
+    stroke: { curve: "smooth", width: 3 },
+    markers: { size: 5 },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.5,
+        opacityTo: 0.1,
+        stops: [0, 90, 100],
+      },
     },
     xaxis: {
       ...chartsConfig.xaxis,
-      categories: ["M", "T", "W", "T", "F", "S", "S"], // Days of week
+      categories: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"],
     },
   },
 };
+
+
 
 const topCoursesChart = {
   type: "bar",
@@ -85,7 +92,7 @@ export const statisticsChartsData = [
     title: "Daily Active Users",
     description: "Student activity this week",
     footer: "+12% vs last week",
-    chart: dailyActiveUsersChart,
+    chart: weeklyStudyHoursChart,
   },
   {
     color: "white",
