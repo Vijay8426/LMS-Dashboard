@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Typography,
   Card,
@@ -23,7 +24,7 @@ import {
   statisticsCardsData,
   statisticsChartsData,
   projectsTableData,
-  ordersOverviewData,
+  newCourses,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 
@@ -75,7 +76,7 @@ export function Home() {
           >
             <div>
               <Typography variant="h6" color="blue-gray" className="mb-1">
-                Projects
+              Courses Leader Board
               </Typography>
               <Typography
                 variant="small"
@@ -106,7 +107,7 @@ export function Home() {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["companies", "members", "budget", "completion"].map(
+                  {["course", "top scorrer", "enrollments"].map(
                     (el) => (
                       <th
                         key={el}
@@ -123,73 +124,51 @@ export function Home() {
                   )}
                 </tr>
               </thead>
-              <tbody>
-                {projectsTableData.map(
-                  ({ img, name, members, budget, completion }, key) => {
-                    const className = `py-3 px-5 ${
-                      key === projectsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+<tbody>
+  {projectsTableData.map(({ name, members, enrolled_count }, key) => {
+    const className = `py-3 px-5 ${
+      key === projectsTableData.length - 1
+        ? ""
+        : "border-b border-blue-gray-50"
+    }`;
 
-                    return (
-                      <tr key={name}>
-                        <td className={className}>
-                          <div className="flex items-center gap-4">
-                            <Avatar src={img} alt={name} size="sm" />
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-bold"
-                            >
-                              {name}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={className}>
-                          {members.map(({ img, name }, key) => (
-                            <Tooltip key={name} content={name}>
-                              <Avatar
-                                src={img}
-                                alt={name}
-                                size="xs"
-                                variant="circular"
-                                className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
-                                }`}
-                              />
-                            </Tooltip>
-                          ))}
-                        </td>
-                        <td className={className}>
-                          <Typography
-                            variant="small"
-                            className="text-xs font-medium text-blue-gray-600"
-                          >
-                            {budget}
-                          </Typography>
-                        </td>
-                        <td className={className}>
-                          <div className="w-10/12">
-                            <Typography
-                              variant="small"
-                              className="mb-1 block text-xs font-medium text-blue-gray-600"
-                            >
-                              {completion}%
-                            </Typography>
-                            <Progress
-                              value={completion}
-                              variant="gradient"
-                              color={completion === 100 ? "green" : "blue"}
-                              className="h-1"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
+    return (
+      <tr key={name} className="hover:bg-gray-50">
+        {/* Course Name */}
+        <td className={className}>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-bold"
+          >
+            {name}
+          </Typography>
+        </td>
+
+        {/* Top Scorer */}
+        <td className={className}>
+          <Typography
+            variant="small"
+            className="text-sm font-medium text-blue-gray-700"
+          >
+            {members}
+          </Typography>
+        </td>
+
+        {/* Enrolled Count */}
+        <td className={className}>
+          <Typography
+            variant="small"
+            className="text-sm font-medium text-blue-gray-900"
+          >
+            {enrolled_count} students
+          </Typography>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
             </table>
           </CardBody>
         </Card>
@@ -201,7 +180,7 @@ export function Home() {
             className="m-0 p-6"
           >
             <Typography variant="h6" color="blue-gray" className="mb-2">
-              Orders Overview
+              New Courses
             </Typography>
             <Typography
               variant="small"
@@ -211,16 +190,16 @@ export function Home() {
                 strokeWidth={3}
                 className="h-3.5 w-3.5 text-green-500"
               />
-              <strong>24%</strong> this month
+              <strong>{newCourses.length} new courses</strong> this month
             </Typography>
           </CardHeader>
           <CardBody className="pt-0">
-            {ordersOverviewData.map(
+            {newCourses.map(
               ({ icon, color, title, description }, key) => (
                 <div key={title} className="flex items-start gap-4 py-3">
                   <div
                     className={`relative p-1 after:absolute after:-bottom-6 after:left-2/4 after:w-0.5 after:-translate-x-2/4 after:bg-blue-gray-50 after:content-[''] ${
-                      key === ordersOverviewData.length - 1
+                      key === newCourses.length - 1
                         ? "after:h-0"
                         : "after:h-4/6"
                     }`}

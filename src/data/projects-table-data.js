@@ -1,64 +1,40 @@
+// src/data/projectsTableData.js
+
 export const projectsTableData = [
   {
-    img: "/img/logo-xd.svg",
-    name: "Material XD Version",
-    members: [
-      { img: "/img/team-1.jpeg", name: "Romina Hadid" },
-      { img: "/img/team-2.jpeg", name: "Ryan Tompson" },
-      { img: "/img/team-3.jpeg", name: "Jessica Doe" },
-      { img: "/img/team-4.jpeg", name: "Alexander Smith" },
-    ],
-    budget: "$14,000",
-    completion: 60,
+    name: "React JS",
+    members: "Alex Johnson",
+    enrolled_count: "300",
   },
   {
-    img: "/img/logo-atlassian.svg",
-    name: "Add Progress Track",
-    members: [
-      { img: "/img/team-2.jpeg", name: "Ryan Tompson" },
-      { img: "/img/team-4.jpeg", name: "Alexander Smith" },
-    ],
-    budget: "$3,000",
-    completion: 10,
+    name: "Data Science Basics",
+    members: "Sophia Lee",
+    enrolled_count: "420",
   },
   {
-    img: "/img/logo-slack.svg",
-    name: "Fix Platform Errors",
-    members: [
-      { img: "/img/team-3.jpeg", name: "Jessica Doe" },
-      { img: "/img/team-1.jpeg", name: "Romina Hadid" },
-    ],
-    budget: "Not set",
-    completion: 100,
+    name: "Python for Beginners",
+    members: "Michael Brown",
+    enrolled_count: "380",
   },
   {
-    img: "/img/logo-spotify.svg",
-    name: "Launch our Mobile App",
-    members: [
-      { img: "/img/team-4.jpeg", name: "Alexander Smith" },
-      { img: "/img/team-3.jpeg", name: "Jessica Doe" },
-      { img: "/img/team-2.jpeg", name: "Ryan Tompson" },
-      { img: "/img/team-1.jpeg", name: "Romina Hadid" },
-    ],
-    budget: "$20,500",
-    completion: 100,
+    name: "UI/UX Design",
+    members: "Emma Wilson",
+    enrolled_count: "250",
   },
   {
-    img: "/img/logo-jira.svg",
-    name: "Add the New Pricing Page",
-    members: [{ img: "/img/team-4.jpeg", name: "Alexander Smith" }],
-    budget: "$500",
-    completion: 25,
+    name: "Cloud Computing",
+    members: "Daniel Martinez",
+    enrolled_count: "310",
   },
   {
-    img: "/img/logo-invision.svg",
-    name: "Redesign New Online Shop",
-    members: [
-      { img: "/img/team-1.jpeg", name: "Romina Hadid" },
-      { img: "/img/team-4.jpeg", name: "Alexander Smith" },
-    ],
-    budget: "$2,000",
-    completion: 40,
+    name: "Machine Learning",
+    members: "Olivia Taylor",
+    enrolled_count: "280",
+  },
+  {
+    name: "Cybersecurity Fundamentals",
+    members: "James Anderson",
+    enrolled_count: "270",
   },
 ];
 
