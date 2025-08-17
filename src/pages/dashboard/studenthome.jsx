@@ -23,7 +23,8 @@ import {
   Tabs,
   TabsHeader,
   Button,
-  Tab, // ✅ Added
+  Tab,
+  Progress // ✅ Added
 } from "@material-tailwind/react";
 
 import {
@@ -92,7 +93,7 @@ export function StudentHome() {
                     onClick={() => setActiveTab("courses")}
                   >
                     <BookOpenIcon className="-mt-0.5 mr-2 inline-block h-5 w-5" />
-                    Courses
+                    Projects
                   </Tab>
                 </TabsHeader>
               </Tabs>
@@ -324,59 +325,94 @@ export function StudentHome() {
             )}
           </div>
 
-          <div className="px-4 pb-4">
-            <Typography variant="h6" color="blue-gray" className="mb-2">
-              Courses
-            </Typography>
-            <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
-              {projectsData.map(
-                ({ img, title, description, tag, route, members }) => (
-                  <Card key={title} color="transparent" shadow={false}>
-                    <CardHeader
-                      floated={false}
-                      color="gray"
-                      className="mx-0 mt-0 mb-4 h-64 xl:h-40"
-                    >
-                      <img
-                        src={img}
-                        alt={title}
-                        className="h-full w-full object-cover"
-                      />
-                    </CardHeader>
-                    <CardBody className="py-0 px-1">
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        {tag}
-                      </Typography>
-                      <Typography
-                        variant="h5"
-                        color="blue-gray"
-                        className="mt-1 mb-2"
-                      >
-                        {title}
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        {description}
-                      </Typography>
-                    </CardBody>
-                    <CardFooter className="mt-6 flex items-center justify-between py-0 px-1">
-                      <Link to={route}>
-                        <Button variant="outlined" size="sm">
-                          view project
-                        </Button>
-                      </Link>
+<div className="px-4 pb-4">
+  <Typography variant="h6" color="blue-gray" className="mb-2">
+    Courses
+  </Typography>
+  <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
+    {projectsData.map(
+      ({ img, title, description, tag, route, progress }) => {
+        // pick color dynamically
+        let progressColor = "red";
+        if (progress >= 75) {
+          progressColor = "green";
+        } else if (progress >= 40) {
+          progressColor = "yellow";
+        } else {
+          progressColor = "red";
+        }
 
-                    </CardFooter>
-                  </Card>
-                )
-              )}
-            </div>
-          </div>
+        return (
+          <Card key={title} color="transparent" shadow={false}>
+            <CardHeader
+              floated={false}
+              color="gray"
+              className="mx-0 mt-0 mb-4 h-64 xl:h-40"
+            >
+              <img
+                src={img}
+                alt={title}
+                className="h-full w-full object-cover"
+              />
+            </CardHeader>
+
+            {/* Progress Bar under image */}
+{/* Progress Bar under image */}
+<div className="px-2 mb-4">
+  <Tooltip content={`${progress}% completed`} placement="top">
+    <div>
+      <Progress
+        value={progress}
+        size="sm"
+        className={
+          progress >= 75
+            ? "bg-blue-100 [&>div]:bg-blue-700" // deep blue for high progress
+            : progress >= 40
+            ? "bg-blue-100 [&>div]:bg-blue-500" // medium blue
+            : "bg-blue-100 [&>div]:bg-blue-300" // lighter blue
+        }
+      />
+    </div>
+  </Tooltip>
+</div>
+
+            <CardBody className="py-0 px-1">
+              <Typography
+                variant="small"
+                className="font-normal text-blue-gray-500"
+              >
+                {tag}
+              </Typography>
+              <Typography
+                variant="h5"
+                color="blue-gray"
+                className="mt-1 mb-2"
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant="small"
+                className="font-normal text-blue-gray-500"
+              >
+                {description}
+              </Typography>
+            </CardBody>
+
+            <CardFooter className="mt-6 flex items-center justify-between py-0 px-1">
+              <Link to={route}>
+                <Button variant="outlined" size="sm">
+                  View Course
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        );
+      }
+    )}
+  </div>
+</div>
+
+
         </CardBody>
       </Card>
     </>

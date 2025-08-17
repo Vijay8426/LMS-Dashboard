@@ -6,6 +6,7 @@ export const projectsData = [
     description:
       "Learn to build modern, responsive web applications using React.js, hooks, and reusable components.",
     route: "/dashboard/profile",
+    progress: 80, // ✅ Almost completed
   },
   {
     img: "/img/MySQL.png",
@@ -14,6 +15,7 @@ export const projectsData = [
     description:
       "Master relational databases with MySQL, including queries, joins, indexes, and optimization.",
     route: "/dashboard/profile",
+    progress: 55, // ⚠️ Midway
   },
   {
     img: "/img/python.png",
@@ -22,6 +24,7 @@ export const projectsData = [
     description:
       "Get started with Python basics including loops, functions & OOPS",
     route: "/dashboard/profile",
+    progress: 35, // ⏳ Just started
   },
   {
     img: "/img/figma.jpg",
@@ -30,6 +33,7 @@ export const projectsData = [
     description:
       "Learn how to design intuitive and interactive UI/UX experiences using Figma.",
     route: "/dashboard/profile",
+    progress: 60,
   },
   {
     img: "/img/network_security.png",
@@ -38,6 +42,7 @@ export const projectsData = [
     description:
       "Understand cybersecurity fundamentals, network vulnerabilities, and secure communication.",
     route: "/dashboard/profile",
+    progress: 20,
   },
   {
     img: "/img/data-science.jpg",
@@ -46,6 +51,7 @@ export const projectsData = [
     description:
       "Analyze and visualize data with Python, statistics, and essential machine learning techniques.",
     route: "/dashboard/profile",
+    progress: 70,
   },
   {
     img: "/img/machine_learning.png",
@@ -54,6 +60,7 @@ export const projectsData = [
     description:
       "Build ML models, train datasets, and explore supervised & unsupervised learning methods.",
     route: "/dashboard/profile",
+    progress: 85,
   },
   {
     img: "/img/cloud.webp",
@@ -62,6 +69,7 @@ export const projectsData = [
     description:
       "Learn about cloud infrastructure, deployment, and services like AWS, Azure, and GCP.",
     route: "/dashboard/profile",
+    progress: 45,
   },
 ];
 

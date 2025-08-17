@@ -73,8 +73,8 @@ const assignmentsChart = {
 export const studentChartsData = [
   {
     color: "white",
-    title: "My Course Progress",
-    description: "Progress in your enrolled courses",
+    title: "Enrollments",
+    description: "Enrollments level",
     footer: "+5% vs last month",
     chart: myCourseProgressChart,
   },
