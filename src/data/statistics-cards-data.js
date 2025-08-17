@@ -1,55 +1,54 @@
+// src/data/adminStats.js
 import {
-  BanknotesIcon,
-  UserPlusIcon,
   UsersIcon,
   ChartBarIcon,
+  ClipboardDocumentCheckIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/solid";
 
 export const statisticsCardsData = [
   {
     color: "gray",
-    icon: BanknotesIcon,
-    title: "Today's Money",
-    value: "$53k",
-    footer: {
-      color: "text-green-500",
-      value: "+55%",
-      label: "than last week",
-    },
-  },
-  {
-    color: "gray",
     icon: UsersIcon,
-    title: "Today's Users",
-    value: "2,300",
+    title: "Total Students",
+    value: "1,250",
     footer: {
       color: "text-green-500",
-      value: "+3%",
-      label: "than last month",
+      value: "+120",
+      label: "new this month",
     },
   },
   {
     color: "gray",
-    icon: UserPlusIcon,
-    title: "New Clients",
-    value: "3,462",
+    icon: AcademicCapIcon,
+    title: "Active Courses",
+    value: "48",
     footer: {
-      color: "text-red-500",
-      value: "-2%",
-      label: "than yesterday",
+      color: "text-green-500",
+      value: "+5",
+      label: "launched this week",
+    },
+  },
+  {
+    color: "gray",
+    icon: ClipboardDocumentCheckIcon,
+    title: "Avg. Completion Rate",
+    value: "76%",
+    footer: {
+      color: "text-green-500",
+      value: "+4%",
+      label: "vs last month",
     },
   },
   {
     color: "gray",
     icon: ChartBarIcon,
-    title: "Sales",
-    value: "$103,430",
+    title: "Active Users Today",
+    value: "312",
     footer: {
-      color: "text-green-500",
-      value: "+5%",
-      label: "than yesterday",
+      color: "text-red-500",
+      value: "-8%",
+      label: "vs yesterday",
     },
   },
 ];
-
-export default statisticsCardsData;

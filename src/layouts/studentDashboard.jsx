@@ -10,7 +10,7 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-export function AdminDashboard() {
+export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
 
@@ -51,6 +51,6 @@ export function AdminDashboard() {
   );
 }
 
-AdminDashboard.displayName = "/src/layout/dashboard.jsx";
+Dashboard.displayName = "/src/layout/dashboard.jsx";
 
-export default AdminDashboard;
+export default Dashboard;
