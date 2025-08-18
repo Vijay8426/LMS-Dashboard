@@ -32,27 +32,30 @@ export function reducer(state, action) {
 
 export function MaterialTailwindControllerProvider({ children }) {
   const role = localStorage.getItem("role") || "admin";
-  const initialState = role=== "admin" ? { 
-openSidenav: true,
-sidenavColor: "white",
-sidenavType: "dark",
-transparentNavbar: false,
-fixedNavbar: true,
-openConfigurator: false,
-} : {
-openSidenav: false,
-sidenavColor: "cyan",
-sidenavType: "white",
-transparentNavbar: true,
-fixedNavbar: false,
-openConfigurator: false,
-};  
+
+  // Detect if mobile screen
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+
+  const initialState = role === "admin"
+    ? {
+        openSidenav: !isMobile,  // closed on mobile, open on desktop
+        sidenavColor: "white",
+        sidenavType: "dark",
+        transparentNavbar: false,
+        fixedNavbar: true,
+        openConfigurator: false,
+      }
+    : {
+        openSidenav: !isMobile, // closed on mobile
+        sidenavColor: "cyan",
+        sidenavType: "white",
+        transparentNavbar: true,
+        fixedNavbar: false,
+        openConfigurator: false,
+      };
 
   const [controller, dispatch] = React.useReducer(reducer, initialState);
-  const value = React.useMemo(
-    () => [controller, dispatch],
-    [controller, dispatch]
-  );
+  const value = React.useMemo(() => [controller, dispatch], [controller, dispatch]);
 
   return (
     <MaterialTailwind.Provider value={value}>
