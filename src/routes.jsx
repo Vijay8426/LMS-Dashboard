@@ -6,8 +6,9 @@ import {
   InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
+  BookOpenIcon
 } from "@heroicons/react/24/solid";
-import { AdminHome, StudentHome, Profile, Tables, Notifications } from "@/pages/dashboard";
+import { AdminHome, StudentHome, Profile, Tables, Notifications, CoursesGrid, Roadmap } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 
 const icon = { className: "w-5 h-5 text-inherit" };
@@ -35,6 +36,31 @@ export function getRoutes() {
             },
       ],
     },
+
+    // ✅ Only show this block for students
+    ...(userRole === "student"
+      ? [
+          {
+            title: "Courses",
+            layout: "dashboard",
+            pages: [
+              {
+                icon: <BookOpenIcon {...icon} />,
+                name: "Courses",
+                path: "/courses",
+                element: <CoursesGrid />,
+              },
+              {
+                icon: <RectangleStackIcon {...icon} />,
+                name: "Domains",
+                path: "/domains",
+                element: <Roadmap />,
+              },
+            ],
+          },
+        ]
+      : []),
+
     {
       title: "auth pages",
       layout: "auth",

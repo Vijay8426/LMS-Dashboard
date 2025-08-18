@@ -3,7 +3,7 @@ export * from "@/data/courses-deadline";
 export * from "@/data/students-charts";
 export * from "@/data/student_statistics";
 export * from "@/data/statistics-charts-data";
-//
+export * from "@/data/courses";
 export * from "@/data/orders-overview-data";
 export * from "@/data/platform-settings-data";
 export * from "@/data/conversations-data";
