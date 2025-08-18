@@ -26,7 +26,7 @@ const handleSubmit = (e) => {
   if (student) {
     localStorage.setItem("user", JSON.stringify({ id: student.id, role: "student" }));
     navigate("/dashboard/studentHome");
-    window.location.reload();
+    //window.location.reload();
 
     return;
   }
@@ -35,7 +35,7 @@ const handleSubmit = (e) => {
   if (email === adminData.email && password === adminData.password) {
     localStorage.setItem("user", JSON.stringify({ id: adminData.id, role: "admin" }));
      navigate("/dashboard/adminHome");
-     window.location.reload();
+     //window.location.reload();
 
     return;
   }
