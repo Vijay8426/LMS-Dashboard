@@ -91,10 +91,11 @@ export function Sidenav({ brandName, routes }) {
 
 Sidenav.defaultProps = {
   brandName: (
-    <span className="flex items-center gap-2">
-      <BuildingLibraryIcon strokeWidth={2.5} className="h-5 w-5 text-white" />
-      LMS Dashboard
-    </span>
+   "LMS Dashboard"
+    // <span className="flex items-center gap-2">
+    //   <BuildingLibraryIcon strokeWidth={2.5} className="h-5 w-5 text-white" />
+    //   LMS Dashboard
+    // </span>
   ),
 };
 
