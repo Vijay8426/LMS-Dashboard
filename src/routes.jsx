@@ -9,44 +9,20 @@ import {
 import { AdminHome, Profile, Tables, Notifications,StudentHome } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 
-const icon = {
-  className: "w-5 h-5 text-inherit",
-};
+const icon = { className: "w-5 h-5 text-inherit" };
+const user = JSON.parse(localStorage.getItem("user"));
+const userRole = user?.role;
 
 export const routes = [
   {
     layout: "dashboard",
     pages: [
       {
-        icon: <HomeIcon {...icon} />,
+        icon: <HomeIcon className="w-5 h-5" />,
         name: "dashboard",
-        path: "/adminHome",
-        element: <AdminHome/>,
-      },
-      {
-        icon: <HomeIcon {...icon} />,
-        name: "dashboard",
-        path: "/studentHome",
-        element: <StudentHome/>,
-      },
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
-        element: <Tables />,
-      },
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
-        path: "/notifications",
-        element: <Notifications />,
-      },
+        path: userRole === "admin" ? "/adminHome" : "/studentHome",
+        element: userRole === "admin" ? <AdminHome /> : <StudentHome />,
+      }
     ],
   },
   {
