@@ -6,9 +6,18 @@ import {
   InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
-  BookOpenIcon
+  BookOpenIcon,
 } from "@heroicons/react/24/solid";
-import { AdminHome, StudentHome, Profile, Tables, Notifications, CoursesGrid, Roadmap } from "@/pages/dashboard";
+import {
+  AdminHome,
+  StudentHome,
+  Profile,
+  Tables,
+  Notifications,
+  CoursesGrid,
+  Roadmap,
+  StudentDetails, // ✅ import admin-only page
+} from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 
 const icon = { className: "w-5 h-5 text-inherit" };
@@ -37,24 +46,43 @@ export function getRoutes() {
       ],
     },
 
-    // ✅ Only show this block for students
-    ...(userRole === "student"
-      ? [
-          {
-            title: "Courses",
-            layout: "dashboard",
-            pages: [
-              {
-                icon: <BookOpenIcon {...icon} />,
-                name: "Courses",
-                path: "/courses",
-                element: <CoursesGrid />,
-              },
+    // ✅ Courses section: always available
+    {
+      title: "Courses",
+      layout: "dashboard",
+      pages: [
+        {
+          icon: <BookOpenIcon {...icon} />,
+          name: "Courses",
+          path: "/courses",
+          element: <CoursesGrid />,
+        },
+        // ✅ Navigator only for students
+        ...(userRole === "student"
+          ? [
               {
                 icon: <RectangleStackIcon {...icon} />,
                 name: "Navigator",
                 path: "/domains",
                 element: <Roadmap />,
+              },
+            ]
+          : []),
+      ],
+    },
+
+    // ✅ Admin-only section
+    ...(userRole === "admin"
+      ? [
+          {
+            title: "Admin",
+            layout: "dashboard",
+            pages: [
+              {
+                icon: <TableCellsIcon {...icon} />,
+                name: "Student Details",
+                path: "/students",
+                element: <StudentDetails />,
               },
             ],
           },

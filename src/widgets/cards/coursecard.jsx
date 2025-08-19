@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardHeader, CardBody, CardFooter, Typography, Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
-export function CourseCard({ title, description, img, route, buttonText = "Enroll Now", progress }) {
+export function CourseCard({ title, description, img, route, buttonText , progress }) {
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}

@@ -5,3 +5,4 @@ export * from "@/pages/dashboard/tables";
 export * from "@/pages/dashboard/notifications";
 export * from "@/pages/dashboard/mycourses";
 export * from "@/pages/dashboard/roadmap";
+export * from "@/pages/dashboard/studentails";
