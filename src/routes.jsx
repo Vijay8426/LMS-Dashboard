@@ -52,7 +52,7 @@ export function getRoutes() {
               },
               {
                 icon: <RectangleStackIcon {...icon} />,
-                name: "Domains",
+                name: "Navigator",
                 path: "/domains",
                 element: <Roadmap />,
               },

@@ -1,15 +1,14 @@
+// src/components/StudentHome.jsx
 import React, { useState } from "react";
 import { studentsData } from "@/data/studentsData";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Card,
-  CardBody,
   Avatar,
   Tabs,
   TabsHeader,
   Tab,
-  Button,
   Progress,
 } from "@material-tailwind/react";
 import {
@@ -19,7 +18,10 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/solid";
 
-import { StatisticsChart } from "@/widgets/charts"; // ✅ Bring back charts
+import { StatisticsChart } from "@/widgets/charts"; 
+import { StatisticsCard } from "@/widgets/cards/statistics-card"; // ✅ import reusable StatisticsCard
+import DataTable from "@/widgets/table/datatable";
+import {CourseCard} from "@/widgets/cards"; // ✅ import reusable CourseCard
 
 export function StudentHome() {
   const navigate = useNavigate();
@@ -42,8 +44,7 @@ export function StudentHome() {
   return (
     <div className="p-4">
       {/* ---- Welcome Banner ---- */}
-      <div className="relative mb-8 h-48 w-full overflow-hidden rounded-xl rounded-xl bg-[url('/img/background-image.png')] bg-cover bg-center
- flex items-center px-6">
+      <div className="relative mb-8 h-48 w-full overflow-hidden rounded-xl bg-[url('/img/background-image.png')] bg-cover bg-center flex items-center px-6">
         <Avatar
           src={profile.avatar}
           alt={profile.name}
@@ -60,142 +61,121 @@ export function StudentHome() {
           </Typography>
         </div>
       </div>
+<Tabs value={activeTab}>
+  <TabsHeader
+    className="overflow-x-auto whitespace-nowrap rounded-none border-b border-gray-200 bg-transparent p-0"
+    indicatorProps={{
+      className: "bg-transparent border-b-2 border-black shadow-none rounded-none",
+    }}
+  >
+    {[
+      { label: "Overview", value: "overview", icon: <UserIcon className="h-5 w-5" /> },
+      { label: "Deadlines", value: "assignments", icon: <ClockIcon className="h-5 w-5" /> },
+      { label: "My Learning", value: "courses", icon: <BookOpenIcon className="h-5 w-5" /> },
+      { label: "Progress", value: "progress", icon: <PresentationChartLineIcon className="h-5 w-5" /> },
+    ].map(({ label, value, icon }) => (
+      <Tab
+        key={value}
+        value={value}
+        onClick={() => setActiveTab(value)}
+        className={`flex items-center gap-2 px-4 py-2 font-semibold min-w-[120px] ${
+          activeTab === value ? "text-black" : "text-gray-600 hover:text-gray-800"
+        }`}
+      >
+        {icon} {label}
+      </Tab>
+    ))}
+  </TabsHeader>
+</Tabs>
 
-      {/* ---- Tabs ---- */}
-      <Tabs value={activeTab} className="mb-6">
-        <TabsHeader>
-          <Tab value="overview" onClick={() => setActiveTab("overview")}>
-            <UserIcon className="mr-2 h-5 w-5" />
-            Overview
-          </Tab>
-          <Tab value="assignments" onClick={() => setActiveTab("assignments")}>
-            <ClockIcon className="mr-2 h-5 w-5" />
-            Deadlines
-          </Tab>
-          <Tab value="courses" onClick={() => setActiveTab("courses")}>
-            <BookOpenIcon className="mr-2 h-5 w-5" />
-            My Learning
-          </Tab>
-          <Tab value="progress" onClick={() => setActiveTab("progress")}>
-            <PresentationChartLineIcon className="mr-2 h-5 w-5" />
-            Progress
-          </Tab>
-        </TabsHeader>
-      </Tabs>
 
       {/* ---- TAB CONTENT ---- */}
       <div>
-        {/* Overview */}
-        {activeTab === "overview" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <Card className="p-4 shadow-md border border-blue-gray-200">
-              <Typography variant="h6" color="blue-gray">
-                Upcoming Assignment
-              </Typography>
-              {assignmentsTableData.length > 0 ? (
-                <div className="mt-2">
-                  <Typography variant="small" color="blue-gray">
-                    {assignmentsTableData[0].title}
-                  </Typography>
-                  <Typography variant="small" className="text-blue-gray-600">
-                    Due: {assignmentsTableData[0].deadline}
-                  </Typography>
-                </div>
-              ) : (
-                <Typography variant="small" className="text-blue-gray-400">
-                  No upcoming assignments 🎉
-                </Typography>
-              )}
-            </Card>
+{/* Overview */}
+{activeTab === "overview" && (
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  {/* --- First Card --- */}
+  <StatisticsCard
+    color="blue"
+    value="12"
+    title="Active Courses"
+    icon={<UserIcon className="w-6 h-6 text-white" />}
+    footer={
+      <Typography className="font-normal text-blue-gray-600">
+        <strong className="text-green-500">+5%</strong> &nbsp; since last month
+      </Typography>
+    }
+  />
 
-            <Card className="p-4 shadow-md border border-blue-gray-200">
-              <Typography variant="h6" color="blue-gray">
-                Active Courses
-              </Typography>
-              <Typography variant="h4" className="mt-2 text-blue-gray-800">
-                {coursesData.length}
-              </Typography>
-            </Card>
+  {/* --- Second Card --- */}
+  <StatisticsCard
+    color="green"
+    value="8"
+    title="Assignments Completed"
+    icon={<BookOpenIcon className="w-6 h-6 text-white" />}
+    footer={
+      <Typography className="font-normal text-blue-gray-600">
+        <strong className="text-green-500">+3</strong> &nbsp; new submissions
+      </Typography>
+    }
+  />
 
-            <Card className="p-4 shadow-md border border-blue-gray-200">
-              <Typography variant="h6" color="blue-gray">
-                Learning Hours
-              </Typography>
-              <Progress
-                value={45}
-                size="lg"
-                className="mt-2 bg-blue-gray-300 [&>div]:bg-blue-gray-900"
-              />
-              <Typography variant="small" className="mt-1 text-blue-gray-600">
-                135 hours this month
-              </Typography>
-            </Card>
-          </div>
-        )}
+  {/* --- Third Card --- */}
+  <StatisticsCard
+    color="purple"
+    value="45h"
+    title="Learning Hours"
+    icon={<ClockIcon className="w-6 h-6 text-white" />}
+    footer={
+      <Typography className="font-normal text-blue-gray-600">
+        <strong className="text-red-500">-2h</strong> &nbsp; compared to last week
+      </Typography>
+    }
+  />
+</div>
 
-        {/* Assignments */}
-        {activeTab === "assignments" && (
-          <Card className="p-4 border border-blue-gray-200 shadow-md">
-            <Typography variant="h6" color="blue-gray" className="mb-4">
-              Assignments & Deadlines
-            </Typography>
-            <table className="w-full min-w-[640px] table-auto">
-              <thead>
-                <tr>
-                  {["Title", "Deadline", "Course"].map((el) => (
-                    <th
-                      key={el}
-                      className="py-2 px-4 text-left text-blue-gray-500 text-xs uppercase"
-                    >
-                      {el}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {assignmentsTableData.map(({ title, deadline, course }, idx) => (
-                  <tr key={idx} className="hover:bg-blue-gray-100">
-                    <td className="py-2 px-4 font-semibold text-blue-gray-800">
-                      {title}
-                    </td>
-                    <td className="py-2 px-4 text-blue-gray-700">{deadline}</td>
-                    <td className="py-2 px-4 text-blue-gray-600">{course}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Card>
-        )}
+)}
 
-        {/* Courses */}
+
+
+{activeTab === "assignments" && (
+  <Card className="p-4 border border-blue-gray-200 shadow-md">
+    <Typography variant="h6" color="blue-gray" className="mb-4">
+      Assignments & Deadlines
+    </Typography>
+
+    {/* ✅ Use reusable DataTable */}
+    <DataTable
+      columns={[
+        { label: "Title", accessor: "title", bold: true },
+        { label: "Deadline", accessor: "deadline" },
+        { label: "Course", accessor: "course" },
+      ]}
+      rows={assignmentsTableData}
+      pageSize={5}
+      searchable={true}
+    />
+  </Card>
+)}
+
+        {/* Courses - ✅ Use CourseCard */}
         {activeTab === "courses" && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {coursesData.map(({ img, title, description, tag, route, progress }) => (
-              <Card
+            {coursesData.map(({ img, title, description, route, progress }) => (
+              <CourseCard
                 key={title}
-                className="p-4 shadow-md border border-blue-gray-200 hover:bg-blue-gray-50"
-              >
-                <img src={img} alt={title} className="rounded-lg h-32 w-full object-cover mb-3" />
-                <Typography variant="small" className="text-blue-gray-500">
-                  {tag}
-                </Typography>
-                <Typography variant="h6" color="blue-gray" className="mt-1">
-                  {title}
-                </Typography>
-                <Typography variant="small" className="text-blue-gray-600 mb-2">
-                  {description}
-                </Typography>
-                <Progress
-                  value={progress}
-                  size="sm"
-                  className="mb-2 bg-blue-gray-300 [&>div]:bg-blue-gray-900"
-                />
-              </Card>
+                img={img}
+                title={title}
+                description={description}
+                route={route}
+                buttonText={progress === 100 ? "Completed" : "Continue"}
+                progress={progress} // ✅ shows progress bar inside CourseCard
+              />
             ))}
           </div>
         )}
 
-        {/* Progress (with old charts restored) */}
+        {/* Progress (charts) */}
         {activeTab === "progress" && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {chartsData.map((props) => (
