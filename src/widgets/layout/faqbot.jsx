@@ -219,7 +219,7 @@ export function FAQChatbot({ open, onClose }) {
   return (
 <aside
   className={`fixed top-0 right-0 z-50
-    h-[95%] md:h-[90%] xl:h-screen
+    h-[99%] md:h-[90%] xl:h-screen
     w-full sm:w-96 md:w-[28rem]
     bg-white shadow-lg flex flex-col
     transition-transform duration-500 ease-in-out ${
