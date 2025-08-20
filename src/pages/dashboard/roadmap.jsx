@@ -13,6 +13,13 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/solid";
 
+/**
+ * Centralized roadmap dataset
+ * Each course contains milestones with:
+ * - title: step name
+ * - desc: short explanation
+ * - icon: visual indicator
+ */
 const roadmapData = {
   "Full Stack": [
     { title: "HTML & CSS", desc: "Basics of web structure & styling", icon: <CodeBracketIcon className="w-5 h-5 text-white" /> },
@@ -57,7 +64,7 @@ const roadmapData = {
   "Cloud & DevOps": [
     { title: "Cloud Basics", desc: "AWS, Azure, GCP", icon: <CloudIcon className="w-5 h-5 text-white" /> },
     { title: "CI/CD", desc: "Automated pipelines", icon: <RocketLaunchIcon className="w-5 h-5 text-white" /> },
-    { title: "Docker & Containers", desc: "Containerized apps", icon: < CpuChipIcon className="w-5 h-5 text-white" /> },
+    { title: "Docker & Containers", desc: "Containerized apps", icon: <CpuChipIcon className="w-5 h-5 text-white" /> },
     { title: "Kubernetes", desc: "Orchestration", icon: <ServerStackIcon className="w-5 h-5 text-white" /> },
     { title: "Monitoring & Logging", desc: "Prometheus, ELK", icon: <ServerIcon className="w-5 h-5 text-white" /> },
     { title: "Deployment", desc: "Cloud deployment", icon: <CloudIcon className="w-5 h-5 text-white" /> },
@@ -65,11 +72,12 @@ const roadmapData = {
 };
 
 export function Roadmap() {
+  // --- Track currently active course tab ---
   const [activeCourse, setActiveCourse] = useState("Full Stack");
 
   return (
     <div className="p-6">
-      {/* ---- Tabs ---- */}
+      {/* --- Tabs (course categories) --- */}
       <div className="flex flex-wrap gap-2 mb-6">
         {Object.keys(roadmapData).map((course) => (
           <button
@@ -86,40 +94,36 @@ export function Roadmap() {
         ))}
       </div>
 
-      {/* ---- Roadmap Scroll ---- */}
-      <div className="relative w-full h-[400px] sm:h-[350px] md:h-[400px] rounded-lg overflow-hidden border border-gray-300 bg-white shadow">
+      {/* --- Roadmap timeline --- */}
+      <div className="relative w-full h-[400px] sm:h-[350px] md:h-[400px] rounded-lg border border-gray-300 bg-white shadow overflow-y-auto">
+        {/* vertical timeline line */}
         <div className="absolute top-0 left-10 sm:left-6 w-[2px] h-full bg-gray-300"></div>
-        <div className="absolute left-0 right-0 top-0 h-full overflow-hidden">
-          <div className="content-scroll relative">
-            {roadmapData[activeCourse].map((milestone, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row items-start sm:items-center justify-start pl-20 sm:pl-16 h-[100px] sm:h-[80px]">
-                <div className="relative w-12 h-12 rounded-full bg-black flex items-center justify-center mr-0 sm:mr-4 mb-2 sm:mb-0 z-10">
-                  {milestone.icon}
+
+        {/* milestones list */}
+        <div className="relative">
+          {roadmapData[activeCourse].map((milestone, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-start pl-20 sm:pl-16 py-4"
+            >
+              {/* milestone icon */}
+              <div className="relative w-12 h-12 rounded-full bg-black flex items-center justify-center mr-0 sm:mr-4 mb-2 sm:mb-0 z-10">
+                {milestone.icon}
+              </div>
+
+              {/* milestone text */}
+              <div>
+                <div className="font-semibold text-gray-800 text-sm sm:text-base">
+                  {milestone.title}
                 </div>
-                <div>
-                  <div className="font-semibold text-gray-800 text-sm sm:text-base">{milestone.title}</div>
-                  <div className="text-gray-500 text-xs sm:text-sm">{milestone.desc}</div>
+                <div className="text-gray-500 text-xs sm:text-sm">
+                  {milestone.desc}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      <style>
-        {`
-          .content-scroll {
-            animation: scroll 20s ease-in-out infinite;
-          }
-          @keyframes scroll {
-            0%, 12% { transform: translateY(0); }
-            20%, 37% { transform: translateY(-100px); }
-            45%, 62% { transform: translateY(-200px); }
-            70%, 87% { transform: translateY(-300px); }
-            95%, 100% { transform: translateY(0); }
-          }
-        `}
-      </style>
     </div>
   );
 }

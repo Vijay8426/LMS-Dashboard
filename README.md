@@ -1,8 +1,9 @@
 Role-Based LMS Dashboard with Chatbot
 Description
+
 A frontend Learning Management System (LMS) built with React + Tailwind CSS, featuring role-based dashboards, a role-aware chatbot, and inline charting.
 
-Admin Dashboard → Manage & monitor learners with stats, charts, and completion reports.
+Admin Dashboard → Manage and monitor learners with stats, charts, and completion reports.
 
 Student Dashboard → Track learning progress, upcoming deadlines, quizzes, and achievements.
 
@@ -12,99 +13,42 @@ Responsive → Works seamlessly across mobile, tablet, and desktop.
 
 This project is part of a Frontend Engineer Assignment.
 
-Badges
 
+Admin Dashboard  Preview:
+![alt text](image.png)
+Student Dashboard Preview:
+![alt text](image-1.png)
+FAQ bot Preview:
+![alt text](image-2.png)
 
+Installation:
+    Requirements
+        1.Node.js (>=16)
+        2.npm or yarn
+    
+    # Clone repository
+    git clone https://github.com/Vijay8426/LMS-Dashboard.git
+    cd lms-dashboard
 
+    # Install dependencies
+    npm install
 
-Visuals
-Dashboard Preview
-(Add screenshots or GIFs here once UI is built — e.g., Admin vs Student view, chatbot modal with chart)
+    # Run in development mode
+    npm run dev
 
-Example layout (placeholder):
+    # Build for production
+    npm run build
 
-pgsql
-Copy
-Edit
-Admin Dashboard → Active Users | Completion Rates | Course Metrics
-Student Dashboard → Progress Bars | Quiz History | Upcoming Deadlines
-Chatbot → Inline charts & role-specific Q&A
-Installation
-Requirements
-Node.js (>= 16)
+Usage:
 
-npm or yarn
+    1.On launch, you’ll see a role selection screen.
 
-Steps
-bash
-Copy
-Edit
-# Clone repository
-git clone https://github.com/<your-username>/lms-dashboard.git
-cd lms-dashboard
+    2.Select Admin or Student to log in (mock authentication).
 
-# Install dependencies
-npm install
+    3.Depending on your role, the dashboard view changes.
 
-# Run in development mode
-npm run dev
+    3.Click the Chatbot button to open a modal.
 
-# Build for production
-npm run build
-Usage
-On launch, you’ll see a role selection screen.
+    4.Ask static Q&A (role-specific).
 
-Select Admin or Student to log in (mock authentication).
-
-Depending on your role, the dashboard view changes.
-
-Click the Chatbot button to open a modal.
-
-Ask static Q&A (role-specific).
-
-Certain queries render charts inline.
-
-Support
-For issues, open a ticket in the GitHub Issues tab.
-
-Contact: [your-email@example.com]
-
-Roadmap
- Role-based dashboards (Admin & Student)
-
- In-chat charting inside chatbot
-
- Mock data integration
-
- Responsive design
-
- Dark mode support
-
- Internationalization (multi-language support)
-
- Backend integration for real-time data
-
-Contributing
-Contributions are welcome!
-
-Fork the repo
-
-Create a feature branch (git checkout -b feature/new-widget)
-
-Commit changes (git commit -m "feat: add new widget")
-
-Push branch (git push origin feature/new-widget)
-
-Open a Pull Request
-
-Authors & Acknowledgment
-Developed by [Your Name] as part of a Frontend Engineer assessment.
-
-Thanks to mentors, peers, and open-source contributors whose tools made this possible.
-
-License
-This project is licensed under the MIT License – see the LICENSE file for details.
-
-Project Status
-Active Development — MVP completed with dashboards & chatbot.
-Future enhancements (dark mode, backend APIs) are planned
+    5.Certain queries render charts inline.

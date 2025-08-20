@@ -132,7 +132,7 @@ export const studentsData = {
       },
       {
         color: "white",
-        title: "Weekly Study Hours",
+        title: "Daily Study Hours",
         description: "Hours spent studying",
         footer: "+3% vs last week",
         chart: {

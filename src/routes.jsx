@@ -1,32 +1,51 @@
+/**
+ * Route Configuration
+ * -------------------
+ * Dynamically generates navigation and route definitions
+ * based on the logged-in user's role (admin / student).
+ *
+ * Roles:
+ *  - Admin → Gets access to Admin Dashboard + Student Management
+ *  - Student → Gets access to Student Dashboard + Navigator
+ *
+ * Auth:
+ *  - If user not logged in → Only "Sign In" route is shown
+ *  - If logged in → "Log Out" replaces "Sign In"
+ */
+
 import {
   HomeIcon,
   ChartBarIcon,
-  UserCircleIcon,
   TableCellsIcon,
-  InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
   BookOpenIcon,
 } from "@heroicons/react/24/solid";
+
 import {
   AdminHome,
   StudentHome,
-  Profile,
-  Tables,
-  Notifications,
   CoursesGrid,
   Roadmap,
-  StudentDetails, // ✅ import admin-only page
+  StudentDetails, // ✅ Admin-only
 } from "@/pages/dashboard";
-import { SignIn, SignUp } from "@/pages/auth";
 
+import { SignIn } from "@/pages/auth";
+
+// ✅ Standardized icon props
 const icon = { className: "w-5 h-5 text-inherit" };
 
 export function getRoutes() {
+  // ✅ Retrieve user from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
   const userRole = user?.role;
 
   return [
+    /**
+     * DASHBOARD (Role-based entry point)
+     * - Admin → Admin Dashboard
+     * - Student → Student Dashboard
+     */
     {
       layout: "dashboard",
       pages: [
@@ -46,7 +65,11 @@ export function getRoutes() {
       ],
     },
 
-    // ✅ Courses section: always available
+    /**
+     * COURSES SECTION (always visible)
+     * - Courses → Available to both roles
+     * - Navigator → Student-only (domain roadmap)
+     */
     {
       title: "Courses",
       layout: "dashboard",
@@ -57,7 +80,6 @@ export function getRoutes() {
           path: "/courses",
           element: <CoursesGrid />,
         },
-        // ✅ Navigator only for students
         ...(userRole === "student"
           ? [
               {
@@ -71,7 +93,10 @@ export function getRoutes() {
       ],
     },
 
-    // ✅ Admin-only section
+    /**
+     * ADMIN SECTION (admin-only)
+     * - Student Details → View/manage student information
+     */
     ...(userRole === "admin"
       ? [
           {
@@ -89,8 +114,13 @@ export function getRoutes() {
         ]
       : []),
 
+    /**
+     * AUTHENTICATION
+     * - If no user → Show "Sign In"
+     * - If user logged in → Replace with "Log Out" (clears storage)
+     */
     {
-      title: "auth pages",
+      title: "Auth Pages",
       layout: "auth",
       pages: !user
         ? [
@@ -105,10 +135,11 @@ export function getRoutes() {
             {
               icon: <ServerStackIcon {...icon} />,
               name: "Log Out",
-              path: "/sign-in",
+              path: "/sign-in", // ✅ re-use sign-in route for logout redirect
               element: <SignIn />,
               action: () => {
                 localStorage.clear();
+                window.location.reload(); // ✅ force refresh for immediate effect
               },
             },
           ],

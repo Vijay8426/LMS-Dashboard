@@ -89,7 +89,7 @@ export const statisticsChartsData = [
   },
   {
     color: "white",
-    title: "Daily Active Users",
+    title: "Weekly Active Users",
     description: "Student activity this week",
     footer: "+12% vs last week",
     chart: weeklyStudyHoursChart,

@@ -72,8 +72,7 @@ const faqQA = {
       "daily active users",
       "top courses",
       "new courses",
-      "weekly study hours",
-      "projects",
+      "weekly study hours",,
       "help",
     ],
     "total students": {

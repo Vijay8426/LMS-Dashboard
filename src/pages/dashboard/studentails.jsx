@@ -1,7 +1,7 @@
 import React from "react";
 import DataTable from "@/widgets/table/datatable";
 
-// ✅ Example dataset with 20 students
+// --- Example dataset: 20 mock students ---
 const studentRows = [
   { id: 1,  name: "Alice Johnson",    email: "alice@example.com",    enrolled: "Yes", courses: 3 },
   { id: 2,  name: "Bob Smith",        email: "bob@example.com",      enrolled: "No",  courses: 0 },
@@ -25,6 +25,8 @@ const studentRows = [
   { id: 20, name: "Tina Turner",      email: "tina@example.com",     enrolled: "Yes", courses: 3 },
 ];
 
+// --- Column definitions for DataTable ---
+// Each column maps to a row accessor
 const studentColumns = [
   { label: "ID", accessor: "id", bold: true },
   { label: "Name", accessor: "name", bold: true },
@@ -36,14 +38,17 @@ const studentColumns = [
 export function StudentDetails({ rows = studentRows }) {
   return (
     <div className="p-4">
+      {/* Section Title */}
       <h2 className="text-xl font-semibold text-slate-800 mb-4">
         Student Details
       </h2>
+
+      {/* Reusable DataTable component */}
       <DataTable
         columns={studentColumns}
         rows={rows}
-        pageSize={5}  // ✅ pagination: 4 pages (5 students per page)
-        searchable={true}
+        pageSize={5}      // ✅ Pagination: 5 rows per page (20 students → 4 pages)
+        searchable={true} // ✅ Enables search bar
       />
     </div>
   );
